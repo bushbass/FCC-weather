@@ -31,13 +31,11 @@ xmlhttp.onreadystatechange = function() {
        
         document.getElementById("description").innerHTML = myObj.weather[0].description;
         document.getElementById("location").innerHTML = myObj.name;
-        // var kTemp = myObj.main.temp;
-        // var fTemp = 9/5 *(myObj.main.temp - 273) + 32;
-        document.getElementById("temp2").innerHTML = Math.round(9/5 *(myObj.main.temp - 273) + 32) + " degrees F";
+        document.getElementById("temp2").innerHTML = myObj.main.temp + " degrees F";
          
     }
 };
-xmlhttp.open("GET", "http://api.openweathermap.org/data/2.5/weather?lat=41.0008446&lon=-74.6431082&appid=c0d593b65018bda3d2f0f58ca4acf332", true);
+xmlhttp.open("GET", "http://api.openweathermap.org/data/2.5/weather?lat=41.0008446&lon=-74.6431082&units=imperial&appid=c0d593b65018bda3d2f0f58ca4acf332", true);
 xmlhttp.send();
 
 </script>
