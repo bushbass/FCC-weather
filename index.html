@@ -22,30 +22,33 @@
   <body>
 <h1>This page doesn't work on github because of a mixed request error but I'm still tracking my changes here.  <a href= "http://alexnielsen.com/weather">Go to alexNielsen.com/weather</a> to see the latest version</h1>	
 
-<script>
+<div id="location"></div>
+<div id="temp2"></div>
+<div id="description"></div>
+<div id="test"></div>
 
+<script>
 var xmlhttp = new XMLHttpRequest();
 xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         myObj = JSON.parse(this.responseText);
-       
         document.getElementById("description").innerHTML = myObj.weather[0].description;
         document.getElementById("location").innerHTML = myObj.name;
         document.getElementById("temp2").innerHTML = myObj.main.temp + " degrees F";
-         
     }
 };
-xmlhttp.open("GET", "http://api.openweathermap.org/data/2.5/weather?lat=41.0008446&lon=-74.6431082&units=imperial&appid=c0d593b65018bda3d2f0f58ca4acf332", true);
+var latitude = "41.0008446";
+var longitude = "-74.6431082";
+var link = "http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&units=imperial&appid=c0d593b65018bda3d2f0f58ca4acf332";
+xmlhttp.open("GET", link, true);
 xmlhttp.send();
 
+$("div#test").html("<h1>text</h1>");
 </script>
 
 
-<div id="location"></div>
-
-<div id="temp2"></div>
-<div id="description"></div>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
   </body>
 </html>
+<!-- "http://api.openweathermap.org/data/2.5/weather?lat=41.0008446&lon=-74.6431082&units=imperial&appid=c0d593b65018bda3d2f0f58ca4acf332" -->
