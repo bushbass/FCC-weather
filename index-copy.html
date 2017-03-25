@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -20,14 +21,21 @@
     <![endif]-->
   </head>
   <body>
-<h1>This page doesn't work on github because of a mixed request error but I'm still tracking my changes here.  <a href= "http://alexnielsen.com/weather">Go to alexNielsen.com/weather</a> to see the latest version</h1>	
+<h1>This page doesn't work on github because of a mixed request error but I'm still tracking my changes here.  <a href= "http://alexnielsen.com/weather">Go to alexNielsen.com/weather</a> to see the latest version</h1> 
 
-<div id="location"></div>
-<div id="temp2"></div>
-<div id="description"></div>
-<div id="test"></div>
+
+
 
 <script>
+
+// GET GEOLOCATION DATA
+  if (navigator.geolocation) {
+     navigator.geolocation.getCurrentPosition(function(position) {
+     var latitude = position.coords.latitude;
+     var longitude = position.coords.longitude;
+     // $("#latLon").html("latitude: " + latitude + "<br>longitude: " + longitude);
+    
+    // AJAX AND DISLAY
 var xmlhttp = new XMLHttpRequest();
 xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -37,27 +45,26 @@ xmlhttp.onreadystatechange = function() {
         document.getElementById("temp2").innerHTML = myObj.main.temp + " degrees F";
     }
 };
+// "http://api.openweathermap.org/data/2.5/weather?lat=41.0008446&lon=-74.6431082&units=imperial&appid=c0d593b65018bda3d2f0f58ca4acf332"
 
-// GET LOCATION DATA 
-  if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(function(position) {
-    $("div#test").html("latitude: " + position.coords.latitude + "<br>longitude: " + position.coords.longitude);
-  });
-};
-// END GET LOCATION DATA 
-
-var latitude = "41.0008446";
-var longitude = "-74.6431082";
-var link = "http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&units=imperial&appid=c0d593b65018bda3d2f0f58ca4acf332";
-xmlhttp.open("GET", link, true);
+var url = "http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&units=imperial&appid=c0d593b65018bda3d2f0f58ca4acf332";
+xmlhttp.open("GET", url, true);
 xmlhttp.send();
+// END AJAX AND DISPLAY
+  });
+}
+// END GET GEOLOCATION DATA
 
-// $("div#test").html("<h1>text</h1>");
 </script>
+
+<div id="location"></div>
+<div id="temp2"></div>
+<div id="description"></div>
+<div id="latLon"></div>
+<div id="link"></div>
 
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
-  </body>
+  <div style='text-align: right;position: fixed;z-index:9999999;bottom: 0; width: 100%;cursor: pointer;line-height: 0;'><a title="Hosted on free web hosting 000webhost.com. Host your own website for FREE." target="_blank" href="https://www.000webhost.com/?utm_source=000webhostapp&utm_campaign=000_logo&utm_medium=website_alexnielsen&utm_content=footer_img"><img src="https://cloud.githubusercontent.com/assets/23024110/20663010/9968df22-b55e-11e6-941d-edbc894c2b78.png"  alt="www.000webhost.com"></a></div></body>
 </html>
-<!-- "http://api.openweathermap.org/data/2.5/weather?lat=41.0008446&lon=-74.6431082&units=imperial&appid=c0d593b65018bda3d2f0f58ca4acf332" -->
